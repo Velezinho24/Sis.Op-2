@@ -75,7 +75,6 @@ void Imagen::guardarImagen(const std::string &nombreArchivo) const {
     }
 
     delete[] buffer;
-    cout << "[INFO] Imagen guardada correctamente en '" << nombreArchivo << "'.\n";
 }
 
 
@@ -178,7 +177,7 @@ void Imagen::escalar(float factor) {
 }
 
 void Imagen::mostrarInfo() const {
-    cout << "Dimensiones actuales: " << anchoOriginal << " x " << altoOriginal << endl;
+    cout << "Dimensiones originales: " << anchoOriginal << " x " << altoOriginal << endl;
     cout << "Dimensiones finales: " << ancho << " x " << alto << endl;
-    cout << "Canales: " << canales << endl;
+    cout << "Canales: " << canales << " (RGB) " << endl;
 }
