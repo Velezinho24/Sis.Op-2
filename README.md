@@ -1,4 +1,4 @@
-# Program Buddy
+# Buddy System
 
 ## Introducción
 
