@@ -1,8 +1,8 @@
-# ImageTool
+# Program Buddy
 
 ## Introducción
 
-**ImageTool** es una herramienta de línea de comandos desarrollada en C++ que permite procesar imágenes aplicando dos transformaciones principales: **rotación** y **escalado**. Además, el programa permite comparar el uso de memoria entre el método convencional (`new/delete`) y una implementación personalizada del **Buddy System**, lo cual permite observar diferencias en rendimiento y consumo de recursos.
+Es una herramienta de línea de comandos desarrollada en C++ que permite procesar imágenes aplicando dos transformaciones principales: **rotación** y **escalado**. Además, el programa permite comparar el uso de memoria entre el método convencional (`new/delete`) y una implementación personalizada del **Buddy System**, lo cual permite observar diferencias en rendimiento y consumo de recursos.
 
 Está diseñado para sistemas operativos tipo Unix (Linux, WSL, etc.) y utiliza la biblioteca OpenCV para manipulación de imágenes.
 
