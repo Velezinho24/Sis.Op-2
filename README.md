@@ -23,7 +23,7 @@ Donde:
 ### Ejemplo
 
 ```sh
-./BuddySystem entrada.png salida.png -escalar 1.5 -angulo 45 -buddy
+./programa_buddy entrada.png salida.png -escalar 1.5 -angulo 45 -buddy
 ```
 
 ## Opciones disponibles
