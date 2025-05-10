@@ -1,14 +1,15 @@
 # Definir el compilador
 CC = g++
 
-# Bandera de compilación
-CFLAGS = -Wall -std=c++17
+# Bandera de compilación 
+CFLAGS = -Wall -std=c++17 -fopenmp
 
 # Nombre del ejecutable
 TARGET = programa_buddy
 
 # Archivos fuente
 SRCS = main.cpp imagen.cpp buddy_allocator.cpp stb_wrapper.cpp
+
 # Archivos objeto generados
 OBJS = $(SRCS:.cpp=.o)
 
@@ -26,6 +27,6 @@ $(TARGET): $(OBJS)
 clean:
 	rm -f $(OBJS) $(TARGET)
 
-# Ejecutar el programa
+# Ejecutar el programa 
 run:
 	./$(TARGET) ./test/testImg01.jpg xxx.jpg -buddy

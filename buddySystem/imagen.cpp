@@ -4,6 +4,8 @@
 #include <iostream>
 #include <cmath>
 #include <algorithm>
+#include <omp.h>
+
 
 using namespace std;
 
@@ -83,31 +85,30 @@ void Imagen::rotar(float anguloGrados) {
     float coseno = cos(radianes);
     float seno = sin(radianes);
 
-    // Calculamos las nuevas dimensiones
     int newAncho = abs(ancho * coseno) + abs(alto * seno);
     int newAlto = abs(ancho * seno) + abs(alto * coseno);
 
     unsigned char*** nuevaMatriz = new unsigned char**[newAlto];
+    #pragma omp parallel for
     for (int y = 0; y < newAlto; y++) {
         nuevaMatriz[y] = new unsigned char*[newAncho];
         for (int x = 0; x < newAncho; x++) {
             nuevaMatriz[y][x] = new unsigned char[canales];
             int origX = (x - newAncho / 2) * coseno - (y - newAlto / 2) * seno + ancho / 2;
             int origY = (x - newAncho / 2) * seno + (y - newAlto / 2) * coseno + alto / 2;
-            
+        
             if (origX >= 0 && origX < ancho && origY >= 0 && origY < alto) {
                 for (int c = 0; c < canales; c++) {
                     nuevaMatriz[y][x][c] = pixeles[origY][origX][c];
                 }
             } else {
                 for (int c = 0; c < canales; c++) {
-                    nuevaMatriz[y][x][c] = (c == 3) ? 0 : 0;
+                    nuevaMatriz[y][x][c] = 0;
                 }
             }
         }
     }
 
-    // Liberar memoria antigua
     for (int y = 0; y < alto; y++) {
         for (int x = 0; x < ancho; x++) {
             delete[] pixeles[y][x];
@@ -116,7 +117,6 @@ void Imagen::rotar(float anguloGrados) {
     }
     delete[] pixeles;
 
-    // Actualizar dimensiones actuales
     ancho = newAncho;
     alto = newAlto;
     pixeles = nuevaMatriz;
@@ -128,12 +128,11 @@ void Imagen::escalar(float factor) {
         return;
     }
 
-    // Calculamos las nuevas dimensiones
     int newAncho = static_cast<int>(ancho * factor);
     int newAlto = static_cast<int>(alto * factor);
 
-    // Crear nueva matriz
     unsigned char*** nuevaMatriz = new unsigned char**[newAlto];
+    #pragma omp parallel for
     for (int y = 0; y < newAlto; y++) {
         nuevaMatriz[y] = new unsigned char*[newAncho];
         for (int x = 0; x < newAncho; x++) {
@@ -161,7 +160,6 @@ void Imagen::escalar(float factor) {
         }
     }
 
-    // Liberar memoria antigua
     for (int y = 0; y < alto; y++) {
         for (int x = 0; x < ancho; x++) {
             delete[] pixeles[y][x];
@@ -170,7 +168,6 @@ void Imagen::escalar(float factor) {
     }
     delete[] pixeles;
 
-    // Actualizar dimensiones actuales
     ancho = newAncho;
     alto = newAlto;
     pixeles = nuevaMatriz;
